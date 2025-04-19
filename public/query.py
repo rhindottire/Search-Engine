@@ -2,42 +2,57 @@ import re
 import sys
 import json
 import pickle
+import io
 
-#Argumen check
-if len(sys.argv) != 4 :
-	print ("\n\nPenggunaan\n\tquery.py [index] [n] [query]..\n")
-	sys.exit(1)
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-query = sys.argv[3].split(" ")
-n = int(sys.argv[2])
+# Argumen check
+if len(sys.argv) != 4:
+    print("\nPenggunaan:\n\tpython query.py [indexDB] [jumlah_output] [query]\n")
+    sys.exit(1)
 
-with open(sys.argv[1], 'rb') as indexdb:
-	indexFile = pickle.load(indexdb)
+# Ambil argumen
+index_file_path = sys.argv[1]
+top_n = int(sys.argv[2])
+raw_query = sys.argv[3].lower()
 
-#query
-list_doc = {}
-for q in query:
-	try :
-		for doc in indexFile[q]:
-			if doc['url'] in list_doc :
-				list_doc[doc['url']]['score'] += doc['score']
-			else :
-				list_doc[doc['url']] = doc
-	except :
-		continue
+# Load TF-IDF index
+with open(index_file_path, 'rb') as f:
+    tf_idf_index = pickle.load(f)
 
+def clean_text(text):
+    text = (text.encode('ascii', 'ignore')).decode('utf-8')
+    text = re.sub(r"[^\w\s]", " ", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip().lower()
+cleaned_query = clean_text(raw_query)
+query_words = cleaned_query.split()
 
-#convert to list
-list_data=[]
-for data in list_doc :
-	list_data.append(list_doc[data])
+# Simpan dokumen hasil query
+document_scores = {}
 
+if cleaned_query in tf_idf_index:
+    for doc in tf_idf_index[cleaned_query]:
+        doc_id = doc['doc_id']
+        document_scores[doc_id] = doc.copy()
+        document_scores[doc_id]['score'] += 1  # bonus karena match exact phrase
+else:
+    # Cari setiap kata dalam query
+    for q in query_words:
+        if q in tf_idf_index:
+            for doc in tf_idf_index[q]:
+                doc_id = doc['doc_id']
+                if doc_id in document_scores:
+                    document_scores[doc_id]['score'] += doc['score']
+                else:
+                    document_scores[doc_id] = doc.copy()
+        else:
+            continue
 
-#sorting list descending
-count=1;
-for data in sorted(list_data, key=lambda k: k['score'], reverse=True):
-	y = json.dumps(data)
-	print(y)
-	if (count == n) :
-		break
-	count+=1
+# Ubah ke list dan urutkan berdasarkan skor
+result_docs = list(document_scores.values())
+result_docs.sort(key=lambda d: d['score'], reverse=True)
+
+# Print hasil
+for i, doc in enumerate(result_docs[:top_n]):
+    print(json.dumps(doc, ensure_ascii=False))

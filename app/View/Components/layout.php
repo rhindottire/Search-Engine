@@ -2,24 +2,20 @@
 
 namespace App\View\Components;
 
-use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class layout extends Component
+class Layout extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $class;
+    public $title;
+
+    public function __construct($class = '', $title = 'Document')
     {
-        //
+        $this->class = $class;
+        $this->title = $title;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View|Closure|string
+    public function render()
     {
         return view('components.layout');
     }
