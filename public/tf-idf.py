@@ -15,7 +15,7 @@ output_file = sys.argv[2]
 # Load stopword
 stopwords = open("stopword.txt", encoding='utf-8').read().splitlines()
 
-# Fungsi untuk membersihkan teks
+# Preprocessing
 def clean_str(text):
     if pd.isna(text):
         return ""
@@ -29,7 +29,7 @@ def clean_str(text):
     text = text.lower()               # Jadikan huruf kecil
     return text
 
-# Baca CSV
+# Data Collection
 df = pd.read_csv(input_csv)
 
 # Kolom teks yang akan digabung untuk proses indexing
@@ -41,20 +41,22 @@ text_columns = [
     "sajah_ayah", "sajdah_no", "no_of_word_ayah", "list_of_words"
 ]
 
-# Siapkan struktur data
 tf_data = {}
 df_data = {}
 content = []
 
-# Iterasi data
 for idx, row in df.iterrows():
     combined_text = " ".join(str(row[col]) for col in text_columns if col in row and pd.notna(row[col]))
+    # Tokenization
     clean_text = clean_str(combined_text)
+    # Stopword removal
     words = [w for w in clean_text.split() if w not in stopwords]
 
+    # TF (Term Frequency)
     tf = {}
     for word in words:
         tf[word] = tf.get(word, 0) + 1
+        # DF (Document Frequency)
         df_data[word] = df_data.get(word, 0) + 1
 
     url_key = f"{row.get('surah_no', '')}:{row.get('ayah_en', '')}"
@@ -80,25 +82,25 @@ for idx, row in df.iterrows():
             "place_of_revelation": row.get("place_of_revelation"),
 
             "sajah_ayah": row.get("sajah_ayah"),
-            "sajdah_no": row.get("sajdah_no"),
+            "sajdah_no": str(row.get("sajdah_no", "")),
             "no_of_word_ayah": row.get("no_of_word_ayah"),
             "list_of_words" : row.get("list_of_words", "").strip("[]").split(",")
         },
         "tf": tf
     }
 
-# Hitung IDF
 idf_data = {}
 total_docs = len(tf_data)
 for word in df_data:
+    # IDF (Inverse Document Frequency)
     idf_data[word] = 1 + math.log10(total_docs / df_data[word])
 
-# Hitung TF-IDF
 tf_idf = {}
 for word in df_data:
     doc_list = []
     for doc_id, data in tf_data.items():
         tf_val = data["tf"].get(word, 0)
+        # TF-IDF Scoring
         score = tf_val * idf_data[word]
         if score > 0:
             doc_list.append({
@@ -106,9 +108,10 @@ for word in df_data:
                 "score": score,
                 **data["meta"]
             })
+    # Indexing (Inverted Index with TF-IDF scores)
     tf_idf[word] = doc_list
 
-# Simpan hasil ke file pickle
+# Serialization / Save Index
 with open(output_file, "wb") as f:
     pickle.dump(tf_idf, f)
 

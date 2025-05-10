@@ -15,7 +15,7 @@
             />
             <x-lucide-mic class="absolute w-5 h-5 right-20" id="mic-search" />
             <x-lucide-image-up class="absolute w-5 h-5 right-12" id="img-search" />
-            <x-lucide-search class="absolute w-5 h-5 right-5" id="icon-search" />
+            <x-lucide-search class="absolute w-5 h-5 right-5" id="searchIcon" />
         </div>
         <div class="flex flex-row gap-5 pt-10 pb-2 px-5 text-white">
             <a href="" class="hover:text-blue-500 hover:underline">Semua</a>
