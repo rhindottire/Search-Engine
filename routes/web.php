@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/search', [SearchController::class, 'query']);
+Route::get('/search', [SearchController::class, 'query'])->name('search');
