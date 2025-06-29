@@ -77,20 +77,79 @@
 </button>
 
 <style>
-/* Reading Mode Themes */
+/* Reading Mode Themes with Better Contrast */
 .reading-dark {
     background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%) !important;
+}
+
+.reading-dark .reading-content {
     color: #e8eaed !important;
+}
+
+.reading-dark .reading-content h1 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.reading-dark .reading-content h2 {
+    color: #f1f3f4 !important;
+}
+
+.reading-dark .reading-content p {
+    color: #d2d4d6 !important;
 }
 
 .reading-light {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%) !important;
+}
+
+.reading-light .reading-content {
+    color: #1a1a1a !important;
+}
+
+.reading-light .reading-content h1 {
+    color: #000000 !important;
+    text-shadow: none;
+}
+
+.reading-light .reading-content h2 {
     color: #202124 !important;
+}
+
+.reading-light .reading-content p {
+    color: #3c4043 !important;
+}
+
+.reading-light .reading-content article {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
 .reading-sepia {
     background: linear-gradient(135deg, #f4f1ea 0%, #faf8f1 50%, #f4f1ea 100%) !important;
+}
+
+.reading-sepia .reading-content {
+    color: #3d2914 !important;
+}
+
+.reading-sepia .reading-content h1 {
+    color: #2d1f0f !important;
+    text-shadow: none;
+}
+
+.reading-sepia .reading-content h2 {
+    color: #4a3319 !important;
+}
+
+.reading-sepia .reading-content p {
     color: #5f4b32 !important;
+}
+
+.reading-sepia .reading-content article {
+    background: rgba(250, 248, 241, 0.8) !important;
+    border: 1px solid rgba(95, 75, 50, 0.2) !important;
 }
 
 /* Reading Content Styling */
@@ -212,6 +271,9 @@ function enterReadingMode() {
     document.getElementById('readingMode').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
     
+    // Apply current theme
+    applyReadingTheme();
+    
     // Initialize reading progress
     updateReadingProgress();
     window.addEventListener('scroll', updateReadingProgress);
@@ -236,11 +298,16 @@ function decreaseFontSize() {
 }
 
 function toggleReadingTheme() {
-    const readingMode = document.getElementById('readingMode');
     const themes = ['dark', 'light', 'sepia'];
     const currentIndex = themes.indexOf(currentTheme);
     const nextIndex = (currentIndex + 1) % themes.length;
     currentTheme = themes[nextIndex];
+    
+    applyReadingTheme();
+}
+
+function applyReadingTheme() {
+    const readingMode = document.getElementById('readingMode');
     
     // Remove all theme classes
     readingMode.classList.remove('reading-dark', 'reading-light', 'reading-sepia');

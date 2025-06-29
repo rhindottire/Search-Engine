@@ -2,44 +2,152 @@
     "title" => "Hasil Pencarian",
 ])
 
-<x-layout class="bg-[#202124]" :title="$title">
-    <x-search.navbar :query="$query" />
+<x-layout class="bg-[#202124] min-h-screen" :title="$title">
+    <x-search.accessibility />
 
-    <main class="flex flex-col gap-6 items-start px-4 sm:px-8 py-6 w-full max-w-5xl mx-auto">
-        <!-- Search stats -->
+    <!-- Enhanced Search Header -->
+    <x-search.header :query="$query" :data="$data ?? []" />
+    
+    <!-- Enhanced Search Filters -->
+    <x-search.filters />
+    
+    <main id="search-results" class="reading-optimized flex flex-col gap-4 items-start px-4 sm:px-8 py-6 w-full max-w-4xl mx-auto">
+        <!-- Search Insights - Only show if there are results -->
+        <x-search.search-insights :data="$data ?? []" />
+
+        <!-- Enhanced Search Statistics -->
         @if(count($data) > 0)
-            <div class="text-gray-400 text-sm ml-1">
-                About {{ count($data) }} results for <span class="text-blue-300 font-medium">{{ $query }}</span>
-            </div>
+            <x-search.stats 
+                :count="count($data)" 
+                :query="$query" 
+                :time="microtime(true) - LARAVEL_START" 
+            />
         @endif
 
-        @forelse ($data as $item)
-            <div class="p-5 bg-[rgb(48,49,52)] rounded-xl shadow-lg w-full hover:shadow-xl transition-shadow duration-200 border border-[rgb(60,64,67)]">
-                <!-- Article header -->
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
-                    <div>
-                        <h2 class="text-[rgb(138,180,248)] text-lg font-medium">
-                            {!! $item['title'] !!}
-                        </h2>
-                        <div class="text-gray-400 text-sm mt-1">
-                            <span class="inline-block px-2 py-0.5 bg-[rgb(60,64,67)] rounded-full mr-2 text-xs">
-                                ID: {{ $item['id'] }}
-                            </span>
-                        </div>
+        <!-- Search Suggestions -->
+        <x-search.suggestions :query="$query" />
+
+        <!-- Enhanced Search Results -->
+        @if(count($data) > 0)
+            <x-search.results :data="$data" />
+        @else
+            <x-search.no-results :query="$query" />
+        @endif
+
+        <!-- Enhanced Pagination -->
+        <x-search.pagination :hasResults="count($data) > 0" />
+    </main>
+
+    <!-- Advanced Components - All hidden by default -->
+    <x-search.search-history />
+    <x-search.advanced-filters />
+    <x-search.export-results :data="$data ?? []" :query="$query" />
+    <x-search.reading-mode />
+    <x-search.search-analytics :data="$data ?? []" :query="$query" />
+
+    <style>
+        /* Page-level animations */
+        main {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom scrollbar for main content */
+        main::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        main::-webkit-scrollbar-track {
+            background: #202124;
+        }
+        
+        main::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #5f6368, #8ab4f8);
+            border-radius: 3px;
+        }
+        
+        main::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #8ab4f8, #aecbfa);
+        }
+
+        /* Reading optimizations */
+        .reading-optimized {
+            line-height: 1.6;
+            font-feature-settings: "kern" 1, "liga" 1;
+        }
+    </style>
+
+    <script>
+        // Enhanced page interactions
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add loading state management
+            const searchForms = document.querySelectorAll('form[action*="search"]');
+            searchForms.forEach(form => {
+                form.addEventListener('submit', () => {
+                    showSearchLoading();
+                });
+            });
+            
+            // Add smooth reveal animation for search results
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            document.querySelectorAll('.search-result-item').forEach(item => {
+                observer.observe(item);
+            });
+            
+            // Add performance monitoring
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(() => {
+                    console.log('Search page loaded successfully! 🔍');
+                });
+            }
+        });
+
+        function showSearchLoading() {
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.className = 'fixed inset-0 bg-[#202124] bg-opacity-90 flex items-center justify-center z-50';
+            loadingOverlay.innerHTML = `
+                <div class="text-center">
+                    <div class="relative">
+                        <div class="w-16 h-16 border-4 border-[#5f6368] border-t-[#8ab4f8] rounded-full animate-spin mx-auto mb-4"></div>
+                        <div class="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-[#4285f4] rounded-full animate-spin mx-auto" style="animation-delay: 0.3s; animation-duration: 1.2s;"></div>
                     </div>
-                    <div class="mt-2 sm:mt-0 text-sm text-gray-400">
-                        Score: <span class="text-[rgb(138,180,248)]">{{ number_format($item['score'], 2) }}</span>
+                    <p class="text-[#e8eaed] text-lg">Mencari hasil terbaik...</p>
+                    <div class="mt-2 flex justify-center space-x-1">
+                        <div class="w-2 h-2 bg-[#8ab4f8] rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-[#8ab4f8] rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2 h-2 bg-[#8ab4f8] rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
                     </div>
                 </div>
-                
-                <!-- Article content -->
-                <p class="text-gray-200 text-base leading-relaxed">{!! $item['content'] !!}</p>
-            </div>
-        @empty
-            <div class="p-8 bg-[rgb(48,49,52)] rounded-xl shadow-md w-full text-center">
-                <p class="text-gray-200 text-lg">No results found for <strong class="text-blue-300">{{ $query }}</strong>.</p>
-                <p class="text-gray-400 mt-2">Try different keywords or check your spelling.</p>
-            </div>
-        @endforelse
-    </main>
+            `;
+            document.body.appendChild(loadingOverlay);
+        }
+    </script>
+
+    <x-search.quick-actions />
 </x-layout>
