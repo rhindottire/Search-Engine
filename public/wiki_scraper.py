@@ -1,6 +1,4 @@
-import wikipediaapi
-import json
-import csv
+import wikipediaapi, json, csv
 
 def scrape_wikipedia(category, max_articles=200):
     # Tambahkan User-Agent sesuai kebijakan Wikipedia
@@ -23,11 +21,11 @@ def scrape_wikipedia(category, max_articles=200):
                 print(f"Scraped article: {page.title}")
 
     # Simpan ke JSON
-    with open('articles.json', 'w', encoding='utf-8') as f:
+    with open('data/UAS/articles.json', 'w', encoding='utf-8') as f:
         json.dump(articles, f, ensure_ascii=False, indent=2)
 
     # Simpan ke CSV
-    with open('articles.csv', 'w', encoding='utf-8', newline='') as f:
+    with open('data/UAS/articles.csv', 'w', encoding='utf-8', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=['id', 'title', 'content'])
         writer.writeheader()
         writer.writerows(articles)

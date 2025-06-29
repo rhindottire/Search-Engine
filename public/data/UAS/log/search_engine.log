@@ -545,3 +545,80 @@
 2025-06-28 17:19:36,166 - INFO - Indeks teratas: [136, 0, 192, 193, 103]
 2025-06-28 17:19:36,167 - INFO - Skor relevansi: [11.412337236827666, 10.978510526043053, 10.054124255659637, 9.486899129933322, 9.318219653075515]
 2025-06-28 17:19:36,167 - INFO - Pencarian selesai dalam 0.55 detik, ditemukan 5 hasil
+2025-06-29 11:32:07,956 - INFO - Memulai pencarian untuk query: kebudayaan nasional
+2025-06-29 11:32:07,956 - INFO - Memuat dataset dari articles.json
+2025-06-29 11:32:07,990 - INFO - Cache valid ditemukan di preprocessed_articles.json, memuat...
+2025-06-29 11:32:07,991 - INFO - Cache dimuat dalam 0.04 detik
+2025-06-29 11:32:07,991 - INFO - Inisialisasi BM25Retriever...
+2025-06-29 11:32:07,991 - INFO - EvalFnToTextLoss: No backward engine provided. Creating one using model_client and model_kwargs.
+2025-06-29 11:32:08,560 - INFO - Struktur hasil BM25: <class 'list'>
+2025-06-29 11:32:08,560 - INFO - Item pertama: RetrieverOutput(id=None, doc_indices=[136, 0, 192, 193, 103], doc_scores=[11.412337236827666, 10.978510526043053, 10.054124255659637, 9.486899129933322, 9.318219653075515], query='budaya nasional', documents=None)
+2025-06-29 11:32:08,560 - INFO - Indeks teratas: [136, 0, 192, 193, 103]
+2025-06-29 11:32:08,561 - INFO - Skor relevansi: [11.412337236827666, 10.978510526043053, 10.054124255659637, 9.486899129933322, 9.318219653075515]
+2025-06-29 11:32:08,561 - INFO - Pencarian selesai dalam 0.60 detik, ditemukan 5 hasil
+2025-06-29 11:33:30,047 - INFO - Memulai pencarian untuk query: kebudayaan nasional
+2025-06-29 11:33:30,047 - INFO - Memuat dataset dari articles.json
+2025-06-29 11:33:30,060 - INFO - Cache valid ditemukan di preprocessed_articles.json, memuat...
+2025-06-29 11:33:30,060 - INFO - Cache dimuat dalam 0.01 detik
+2025-06-29 11:33:30,060 - INFO - Inisialisasi BM25Retriever...
+2025-06-29 11:33:30,060 - INFO - EvalFnToTextLoss: No backward engine provided. Creating one using model_client and model_kwargs.
+2025-06-29 11:33:30,528 - INFO - Struktur hasil BM25: <class 'list'>
+2025-06-29 11:33:30,528 - INFO - Item pertama: RetrieverOutput(id=None, doc_indices=[136, 0, 192, 193, 103], doc_scores=[11.412337236827666, 10.978510526043053, 10.054124255659637, 9.486899129933322, 9.318219653075515], query='budaya nasional', documents=None)
+2025-06-29 11:33:30,528 - INFO - Indeks teratas: [136, 0, 192, 193, 103]
+2025-06-29 11:33:30,528 - INFO - Skor relevansi: [11.412337236827666, 10.978510526043053, 10.054124255659637, 9.486899129933322, 9.318219653075515]
+2025-06-29 11:33:30,528 - INFO - Pencarian selesai dalam 0.48 detik, ditemukan 5 hasil
+2025-06-29 11:33:31,255 - INFO - Memulai pencarian untuk query: kebudayaan nasional
+2025-06-29 11:33:31,255 - INFO - Memuat dataset dari articles.json
+2025-06-29 11:33:31,264 - INFO - Cache valid ditemukan di preprocessed_articles.json, memuat...
+2025-06-29 11:33:31,264 - INFO - Cache dimuat dalam 0.01 detik
+2025-06-29 11:33:31,265 - INFO - Inisialisasi BM25Retriever...
+2025-06-29 11:33:31,265 - INFO - EvalFnToTextLoss: No backward engine provided. Creating one using model_client and model_kwargs.
+2025-06-29 11:33:31,700 - INFO - Struktur hasil BM25: <class 'list'>
+2025-06-29 11:33:31,700 - INFO - Item pertama: RetrieverOutput(id=None, doc_indices=[136, 0, 192, 193, 103], doc_scores=[11.412337236827666, 10.978510526043053, 10.054124255659637, 9.486899129933322, 9.318219653075515], query='budaya nasional', documents=None)
+2025-06-29 11:33:31,701 - INFO - Indeks teratas: [136, 0, 192, 193, 103]
+2025-06-29 11:33:31,701 - INFO - Skor relevansi: [11.412337236827666, 10.978510526043053, 10.054124255659637, 9.486899129933322, 9.318219653075515]
+2025-06-29 11:33:31,701 - INFO - Pencarian selesai dalam 0.45 detik, ditemukan 5 hasil
+2025-06-29 11:34:25,114 - INFO - Memulai pencarian untuk query: Kebudayaan Indonesia adalah seluruh kebudayaan negara, kebudayaan setempat, maupun kebudayaan asing yang telah ada di Indonesia sebelum Indonesia merdeka pada tahun 1945.
+2025-06-29 11:34:25,114 - INFO - Memuat dataset dari articles.json
+2025-06-29 11:34:25,128 - INFO - Cache valid ditemukan di preprocessed_articles.json, memuat...
+2025-06-29 11:34:25,128 - INFO - Cache dimuat dalam 0.01 detik
+2025-06-29 11:34:25,128 - INFO - Inisialisasi BM25Retriever...
+2025-06-29 11:34:25,128 - INFO - EvalFnToTextLoss: No backward engine provided. Creating one using model_client and model_kwargs.
+2025-06-29 11:34:25,846 - INFO - Struktur hasil BM25: <class 'list'>
+2025-06-29 11:34:25,846 - INFO - Item pertama: RetrieverOutput(id=None, doc_indices=[0, 122, 103, 109, 127], doc_scores=[52.595917331035814, 44.20422570283116, 42.337216209110636, 40.86560577762885, 40.45492110497778], query='budaya indonesia seluruh budaya negara budaya tempat maupun budaya asing telah di indonesia indonesia merdeka tahun 1945', documents=None)
+2025-06-29 11:34:25,846 - INFO - Indeks teratas: [0, 122, 103, 109, 127]
+2025-06-29 11:34:25,846 - INFO - Skor relevansi: [52.595917331035814, 44.20422570283116, 42.337216209110636, 40.86560577762885, 40.45492110497778]
+2025-06-29 11:34:25,847 - INFO - Pencarian selesai dalam 0.73 detik, ditemukan 5 hasil
+2025-06-29 11:34:26,699 - INFO - Memulai pencarian untuk query: Kebudayaan Indonesia adalah seluruh kebudayaan negara, kebudayaan setempat, maupun kebudayaan asing yang telah ada di Indonesia sebelum Indonesia merdeka pada tahun 1945.
+2025-06-29 11:34:26,700 - INFO - Memuat dataset dari articles.json
+2025-06-29 11:34:26,710 - INFO - Cache valid ditemukan di preprocessed_articles.json, memuat...
+2025-06-29 11:34:26,710 - INFO - Cache dimuat dalam 0.01 detik
+2025-06-29 11:34:26,710 - INFO - Inisialisasi BM25Retriever...
+2025-06-29 11:34:26,710 - INFO - EvalFnToTextLoss: No backward engine provided. Creating one using model_client and model_kwargs.
+2025-06-29 11:34:27,269 - INFO - Struktur hasil BM25: <class 'list'>
+2025-06-29 11:34:27,269 - INFO - Item pertama: RetrieverOutput(id=None, doc_indices=[0, 122, 103, 109, 127], doc_scores=[52.595917331035814, 44.20422570283116, 42.337216209110636, 40.86560577762885, 40.45492110497778], query='budaya indonesia seluruh budaya negara budaya tempat maupun budaya asing telah di indonesia indonesia merdeka tahun 1945', documents=None)
+2025-06-29 11:34:27,269 - INFO - Indeks teratas: [0, 122, 103, 109, 127]
+2025-06-29 11:34:27,269 - INFO - Skor relevansi: [52.595917331035814, 44.20422570283116, 42.337216209110636, 40.86560577762885, 40.45492110497778]
+2025-06-29 11:34:27,269 - INFO - Pencarian selesai dalam 0.57 detik, ditemukan 5 hasil
+2025-06-29 11:34:49,384 - INFO - Memulai pencarian untuk query: Kostum nasional Indonesia adalah kostum nasional yang mewakili Republik Indonesia. Kostum tersebut berasal dari budaya Indonesia dan tradisi tekstil tradisional Indonesia. Saat ini, sebagian besar kostum nasional Indonesia yang paling terkenal adalah Batik dan Kebaya, meskipun aslinya kostum tersebut utamanya masuk pada budaya Jawa dan Bali, yang sebagian besar berpengaruh pada budaya Jawa, Sunda dan Bali. Sejak Jawa menjadi pusat politik dan populasi Indonesia, kostum foklor dari pulau tersebut naik menjadi status nasional. Referensi Templat:Kostum foklor
+2025-06-29 11:34:49,385 - INFO - Memuat dataset dari articles.json
+2025-06-29 11:34:49,395 - INFO - Cache valid ditemukan di preprocessed_articles.json, memuat...
+2025-06-29 11:34:49,395 - INFO - Cache dimuat dalam 0.01 detik
+2025-06-29 11:34:49,395 - INFO - Inisialisasi BM25Retriever...
+2025-06-29 11:34:49,395 - INFO - EvalFnToTextLoss: No backward engine provided. Creating one using model_client and model_kwargs.
+2025-06-29 11:34:50,333 - INFO - Struktur hasil BM25: <class 'list'>
+2025-06-29 11:34:50,335 - INFO - Item pertama: RetrieverOutput(id=None, doc_indices=[136, 0, 179, 4, 103], doc_scores=[285.29387988728087, 182.28142276177672, 180.9691654456194, 166.1002079872556, 157.15537730339145], query='kostum nasional indonesia kostum nasional wakil republik indonesia kostum sebut asal budaya indonesia tradisi tekstil tradisional indonesia ini besar kostum nasional indonesia paling kenal batik kebaya meski asli kostum sebut utama masuk budaya jawa bal bagi besar pengaruh budaya jawa sunda bal sejak jawa jadi pusat politik populasi indonesia kostum foklor pulau sebut naik jadi status nasional referensi templatkostum foklor', documents=None)
+2025-06-29 11:34:50,335 - INFO - Indeks teratas: [136, 0, 179, 4, 103]
+2025-06-29 11:34:50,335 - INFO - Skor relevansi: [285.29387988728087, 182.28142276177672, 180.9691654456194, 166.1002079872556, 157.15537730339145]
+2025-06-29 11:34:50,335 - INFO - Pencarian selesai dalam 0.95 detik, ditemukan 5 hasil
+2025-06-29 11:34:50,968 - INFO - Memulai pencarian untuk query: Kostum nasional Indonesia adalah kostum nasional yang mewakili Republik Indonesia. Kostum tersebut berasal dari budaya Indonesia dan tradisi tekstil tradisional Indonesia. Saat ini, sebagian besar kostum nasional Indonesia yang paling terkenal adalah Batik dan Kebaya, meskipun aslinya kostum tersebut utamanya masuk pada budaya Jawa dan Bali, yang sebagian besar berpengaruh pada budaya Jawa, Sunda dan Bali. Sejak Jawa menjadi pusat politik dan populasi Indonesia, kostum foklor dari pulau tersebut naik menjadi status nasional. Referensi Templat:Kostum foklor
+2025-06-29 11:34:50,968 - INFO - Memuat dataset dari articles.json
+2025-06-29 11:34:50,977 - INFO - Cache valid ditemukan di preprocessed_articles.json, memuat...
+2025-06-29 11:34:50,977 - INFO - Cache dimuat dalam 0.01 detik
+2025-06-29 11:34:50,977 - INFO - Inisialisasi BM25Retriever...
+2025-06-29 11:34:50,978 - INFO - EvalFnToTextLoss: No backward engine provided. Creating one using model_client and model_kwargs.
+2025-06-29 11:34:51,932 - INFO - Struktur hasil BM25: <class 'list'>
+2025-06-29 11:34:51,932 - INFO - Item pertama: RetrieverOutput(id=None, doc_indices=[136, 0, 179, 4, 103], doc_scores=[285.29387988728087, 182.28142276177672, 180.9691654456194, 166.1002079872556, 157.15537730339145], query='kostum nasional indonesia kostum nasional wakil republik indonesia kostum sebut asal budaya indonesia tradisi tekstil tradisional indonesia ini besar kostum nasional indonesia paling kenal batik kebaya meski asli kostum sebut utama masuk budaya jawa bal bagi besar pengaruh budaya jawa sunda bal sejak jawa jadi pusat politik populasi indonesia kostum foklor pulau sebut naik jadi status nasional referensi templatkostum foklor', documents=None)
+2025-06-29 11:34:51,932 - INFO - Indeks teratas: [136, 0, 179, 4, 103]
+2025-06-29 11:34:51,932 - INFO - Skor relevansi: [285.29387988728087, 182.28142276177672, 180.9691654456194, 166.1002079872556, 157.15537730339145]
+2025-06-29 11:34:51,932 - INFO - Pencarian selesai dalam 0.96 detik, ditemukan 5 hasil

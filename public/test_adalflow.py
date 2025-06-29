@@ -1,20 +1,7 @@
-# import sys
-# print(sys.path)
-# import sys
-# print("Python executable:", sys.executable)
-# from adalflow.components.retriever import BM25Retriever
-# print(BM25Retriever)
-
-import json
-import sys
-import os
-import logging
-import time
-import hashlib
+import json, sys, os, logging, time, hashlib, re
 from adalflow.components.retriever import BM25Retriever
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
-import re
 from multiprocessing import Pool, cpu_count
 
 # Setup logging
@@ -22,7 +9,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('search_engine.log'),
+        logging.FileHandler('data/UAS/logsearch_engine.log'),
         logging.StreamHandler()
     ]
 )
@@ -58,7 +45,7 @@ def preprocess_article(item):
     doc = preprocess_text(item['content'])
     return {"id": item["id"], "title": item["title"], "content": item["content"], "preprocessed": doc}
 
-def load_dataset(file_path='articles.json', cache_path='preprocessed_articles.json'):
+def load_dataset(file_path='data/UAS/articles.json', cache_path='data/UAS/preprocessed.json'):
     """Load dataset dan cache dokumen yang sudah dipreproses."""
     start_time = time.time()
     logger.info(f"Memuat dataset dari {file_path}")
@@ -109,7 +96,7 @@ def load_dataset(file_path='articles.json', cache_path='preprocessed_articles.js
         logger.error(f"Error memuat dataset: {str(e)}")
         return [], []
 
-def search(query, dataset_file='articles.json'):
+def search(query, dataset_file='data/UAS/articles.json'):
     """Cari artikel berdasarkan query menggunakan BM25."""
     start_time = time.time()
     logger.info(f"Memulai pencarian untuk query: {query}")
@@ -132,6 +119,7 @@ def search(query, dataset_file='articles.json'):
         
         # Ambil doc_indices dan doc_scores
         if results and hasattr(results[0], 'doc_indices') and hasattr(results[0], 'doc_scores'):
+            # BM25 = Σ (IDF(term) * (f(term, doc) * (k1 + 1)) / (f(term, doc) + k1 * (1 - b + b * (len(doc) / avg_doc_len))))
             top_indices = results[0].doc_indices[:10]
             top_scores = results[0].doc_scores[:10]
             logger.info(f"Indeks teratas: {top_indices}")
