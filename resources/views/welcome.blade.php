@@ -1,7 +1,7 @@
 @props([
     "title" => "NextGoogle",
 ])
-
+    
 <x-layout class="bg-[#202124]" :title="$title">
     <x-welcome.hero />
 
@@ -9,21 +9,19 @@
         <h1 class="text-6xl text-white font-bold">
             <span class="text-6xl text-blue-600">Next</span>Google
         </h1>
-        <nav class="flex justify-center items-center w-full mt-9">
-            <form id="searchForm" method="GET" action="{{ route('search') }}">
-                <div class="w-1/2 flex justify-center items-end mb-10 relative">
-                    <x-lucide-search class="absolute w-5 h-5 left-4 top-10" id="searchIcon" />
-                    <input class="mt-6 bg-white w-full h-12 pl-16 rounded-3xl p-4 pr-40"
-                           type="search" id="searchInput" name="query" autocomplete="off"
-                           placeholder="Search NextGoogle or type a URL"
-                           value="{{ request()->input('query') }}"
-                           form="searchForm"
-                    />
-                    <x-lucide-mic class="absolute w-5 h-5 right-12 top-10" id="searchMic" />
-                    <x-lucide-image-up class="absolute w-5 h-5 right-5 top-10" id="searchImg" />
-                </div>
-            </form>
-        </nav>
+        <form id="searchForm" method="GET" action="{{ route('search') }}" class="flex justify-center items-center w-full mt-9">
+            <div class="w-1/2 flex justify-center items-end mb-10 relative">
+                <x-lucide-search class="absolute w-5 h-5 left-4 top-10" id="searchIcon" />
+                <input class="mt-6 bg-white w-full h-12 pl-16 rounded-3xl p-4 pr-40"
+                        type="search" id="searchInput" name="query" autocomplete="off"
+                        placeholder="Search NextGoogle or type a URL"
+                        value="{{ request()->input('query') }}"
+                        form="searchForm"
+                />
+                <x-lucide-mic class="absolute w-5 h-5 right-12 top-10" id="searchMic" />
+                <x-lucide-image-up class="absolute w-5 h-5 right-5 top-10" id="searchImg" />
+            </div>
+        </form>
     </main>
 
     <x-welcome.shortcut />

@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class SearchController extends Controller
-{
-    public function query(Request $request)
-    {
+class SearchController extends Controller {
+    public function query(Request $request) {
         $query = $request->input('query', 'kebudayaan nasional');
 
         // Path ke python dari virtual environment
-        $pythonBin = base_path('.venv/Scripts/python.exe'); // <- ini path .venv di Windows
+        $pythonBin = base_path('.venv/Scripts/python.exe');
         $pythonScript = base_path('public/test_adalflow.py');
 
         // Escape argumen dengan aman
@@ -20,7 +18,7 @@ class SearchController extends Controller
         $command = "\"{$pythonBin}\" \"{$pythonScript}\" {$escapedQuery}";
 
         // Jalankan command dan tangkap stderr juga
-        $output = shell_exec($command . ' 2>&1');
+        $output = shell_exec($command);
         // dd($output);
 
         // Debug output Python
